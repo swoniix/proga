@@ -1,0 +1,89 @@
+#include <iostream>
+using namespace std;
+
+enum menu
+{
+    plus_op = 101,
+    minus_op = 102,
+    divide_op = 103,
+    mult = 104,
+    EXIT_MENU = 0
+};
+
+double add (double a, double b) 
+{ 
+    return a + b; 
+}
+double subtract(double a, double b) 
+{
+   return a - b; 
+}
+double multiply(double a, double b) 
+{
+    return a * b;
+}
+double divide(double a, double b)
+{
+    if (b == 0)
+    {
+        cout << "Error: division by zero." << endl;
+        return 0;
+    }
+    return a / b;
+}
+
+void menu()
+{
+    int choice;
+    int num1, num2;
+
+    for (;;)
+    {
+        cout << "\nmenu:" << endl;
+        cout << "adding 101" << endl;
+        cout << "subtract 102" << endl;
+        cout << "multiply 104" << endl;
+        cout << "divide 103" << endl;
+        cout << "0 - exit" << endl;
+        cout << "select an operation: ";
+        cin >> choice;
+
+        if (choice == EXIT_MENU)
+        {
+            cout << "over." << endl;
+            break;
+        }
+
+        cout << "first number: ";
+        cin >> num1;
+        cout << "second number: ";
+        cin >> num2;
+
+        if (choice == plus_op)
+        {
+            cout << "result: " << add(num1, num2) << endl;
+        }
+        else if (choice == minus_op)
+        {
+            cout << "result: " << subtract(num1, num2) << endl;
+        }
+        else if (choice == divide_op)
+        {
+            cout << "result: " << divide(num1, num2) << endl;
+        }
+        else if (choice == mult)
+        {
+            cout << "result: " << multiply(num1, num2) << endl;
+        }
+        else
+        {
+            cout << "error. try again." << endl;
+        }
+    }
+}
+
+int main()
+{
+    menu();
+    return 0;
+}
