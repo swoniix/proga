@@ -1,0 +1,103 @@
+#include <iostream>
+using namespace std;
+void shuffleArray(int* arr, int size) 
+{
+    for (int i = 0; i < size; ++i) 
+    {
+        int randIndex = i + (rand() % (size - i));
+       
+        int temp = *(arr + i);
+        *(arr + i) = *(arr + randIndex);
+        *(arr + randIndex) = temp;
+    }
+}
+
+void sortDescending(int* arr, int start, int end) 
+{
+    for (int i = start; i < end - 1; ++i)
+    {
+        for (int j = i + 1; j < end; ++j) 
+        {
+            if (*(arr + i) < *(arr + j)) 
+            {
+                int temp = *(arr + i);
+                *(arr + i) = *(arr + j);
+                *(arr + j) = temp;
+            }
+        }
+    }
+}
+
+void sortAscending(int* arr, int start, int end) 
+{
+    for (int i = start; i < end - 1; ++i) 
+    {
+        for (int j = i + 1; j < end; ++j) 
+        {
+            if (*(arr + i) > *(arr + j)) 
+            {
+                int temp = *(arr + i);
+                *(arr + i) = *(arr + j);
+                *(arr + j) = temp;
+            }
+        }
+    }
+}
+
+int main() {
+    const int SIZE = 20;
+    int arr[SIZE];
+
+    
+    int* ptr = arr; 
+    for (int i = 0; i < SIZE; ++i) 
+    {
+        *(ptr + i) = i + 1;
+    }
+
+    srand(7); 
+    shuffleArray(ptr, SIZE);
+
+    cout << "shuffle array: ";
+    for (int i = 0; i < SIZE; ++i) 
+    {
+        cout << *(ptr + i) << " ";
+    }
+    cout << endl;
+
+ 
+    int randomNum = 1 + (rand() % 20);
+    cout << "random number: " << randomNum << endl;
+
+    
+    int pos = -1;
+    for (int i = 0; i < SIZE; ++i) 
+    {
+        if (*(ptr + i) == randomNum) 
+        {
+            pos = i;
+            break;
+        }
+    }
+
+    cout << "position of element: " << pos << endl;
+
+   
+    if (pos > 0) 
+    {
+        sortDescending(ptr, 0, pos);
+    }
+
+
+    if (pos < SIZE - 1) 
+    {
+        sortAscending(ptr, pos + 1, SIZE);
+    }
+
+    cout << "Array: ";
+    for (int i = 0; i < SIZE; ++i) 
+    {
+        cout << *(ptr + i) << " ";
+    }
+    cout << endl;
+}
