@@ -1,0 +1,53 @@
+#include <iostream>
+using namespace std;
+
+void my_increment(int* ptr, int n = 1)
+{
+	*ptr += n;
+}
+void multiply(int* a, int* b, int* c)
+{
+	*c = (*a) * (*b);
+}
+void negate(double* ptr)
+{
+	*ptr = -(*ptr);
+}
+void setValue(int* ptr, int val)
+{
+	*ptr = val;
+}
+void concatenateDigits(int* a, int* b, int* result) {
+    int temp = *b;
+    int mult = 1;
+
+    while (temp > 0) {
+        mult *= 10;
+        temp /= 10;
+    }
+
+    *result = (*a) * mult + (*b);
+}
+
+int main()
+{
+    int p = 2;
+    my_increment(&p);
+    cout << "my_increment: " << p << endl;
+
+    int a = 8, b = 2, res;
+    multiply(&a, &b, &res);
+    cout << "multiply: " << a << " * " << b << " = " << res << endl;
+
+    double y = 9.23;
+    negate(&y);
+    cout << "negate: " << y << endl;
+
+    int k = 2;
+    setValue(&k, 9);
+    cout << "setValue: " << k << endl;
+
+    int num1 = 5, num2 = 6, result;
+    concatenateDigits(&num1, &num2, &result);
+    cout << "concatenateDigits: " << num1 << " * " << num2 << " = " << result << endl;
+}
