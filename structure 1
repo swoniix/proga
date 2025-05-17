@@ -1,0 +1,123 @@
+#include <iostream>
+using namespace std;
+struct WashingM
+{
+  char *company;
+  char *color;
+  double width;
+  double length;
+  double height;
+  int power;
+  int spinSpeed;
+  int heatingT;
+};
+struct Iron
+{
+  char *company;
+  char *model;
+  char *color;
+  int minT;
+  int maxT;
+  bool steamSupply;
+  int power;
+};
+struct Boiler
+{
+  char *company;
+  char *color;
+  int power;
+  double volume;
+  int heatingT;
+};
+void showBoiler(Boiler b)
+{
+  cout << "Company: " << b.company << endl;
+  cout << "Color: " << b.color << endl;
+  cout << "Power: " << b.power << endl;
+  cout << "Volume: " << b.volume << endl;
+  cout << "Heating Temperature: " << b.heatingT << endl;
+};
+void showIron(Iron ir)
+{
+  cout << "Company: " << ir.company << endl;
+  cout << "Model: " << ir.model << endl;
+  cout << "Color: " << ir.color << endl;
+  cout << "Minimum temperature: " << ir.minT << endl;
+  cout << "Maximum temperature: " << ir.maxT << endl;
+  cout << "Steam Supply: " << ir.steamSupply << endl;
+  cout << "Power: " << ir.power << endl;
+};
+void showWashM(WashingM w)
+{
+  cout << "Comapany: " << w.company << endl;
+  cout << "Color: " << w.color << endl;
+  cout << "Widht: " << w.width << endl;
+  cout << "Height: " << w.height << endl;
+  cout << "Power: " << w.power << endl;
+  cout << "Spin Speed: " << w.spinSpeed << endl;
+  cout << "Heating Temperature: " << w.heatingT << endl;
+};
+struct Animal
+{
+  char name[50];
+  char type[50];
+  char nickname[50];
+};
+void fillAnimal(Animal &a)
+{
+  cout << "Name animal: ";
+  cin.getline(a.name, 50);
+  cout << "Animal type: ";
+  cin.getline(a.type, 50);
+  cout << "Nickname: ";
+  cin.getline(a.nickname, 50);
+}
+void showAnimal(Animal &a)
+{
+  cout << "Name: " << a.name << endl;
+  cout << "Type: " << a.type << endl;
+  cout << "Nickname: " << a.nickname << endl;
+}
+void makeSound(Animal &a)
+{
+  if (strcmp(a.name, "dog") == 0)
+  {
+    cout << "woof!" << endl;
+  }
+  else if (strcmp(a.name, "cat") == 0)
+  {
+    cout << "meow!" << endl;
+  }
+  else
+  {
+    cout << "???" << endl;
+  }
+}
+int main()
+{
+  cout << "WASHING MACHINE" << endl;
+  const int N = 8;
+  WashingM w1 = {(char *)"Samsung", (char *)"White", 60.7, 55.4, 85.0, 2000, 1200, 90};
+  WashingM machines[N] = {w1};
+  showWashM(machines[0]);
+
+  const int M = 7;
+  cout << "IRON" << endl;
+  Iron ir1 = {(char *)"Philips", (char *)"GC909/60", (char *)"Black", 120, 220, true, 3000};
+  Iron desk[M] = {ir1};
+  showIron(desk[0]);
+
+  const int B = 5;
+  cout << "BOILER" << endl;
+  Boiler b1 = {(char *)"Ariston", (char *)"White", 2000, 80.4, 75};
+  Boiler bac[B] = {b1};
+  showBoiler(bac[0]);
+
+  cout << "ANIMAL" << endl;
+  Animal a;
+  fillAnimal(a);
+  cout << "Information: ";
+  showAnimal(a);
+  cout << "Sound: ";
+  makeSound(a);
+}
