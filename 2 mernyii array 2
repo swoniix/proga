@@ -1,0 +1,157 @@
+#include <iostream>
+using namespace std;
+
+int main()
+{
+  const int MAX = 100;
+  int A[MAX][MAX], B[MAX][MAX], C[MAX][MAX];
+  int rA, cA, rB, cB, rC, cC;
+
+  cout << "Rows and cols for A: ";
+  cin >> rA >> cA;
+  cout << "Enter A:\n";
+  for (int i = 0; i < rA; i++)
+    for (int j = 0; j < cA; j++)
+      cin >> A[i][j];
+
+  cout << "Rows and cols for B: ";
+  cin >> rB >> cB;
+  cout << "Enter B:\n";
+  for (int i = 0; i < rB; i++)
+    for (int j = 0; j < cB; j++)
+      cin >> B[i][j];
+
+  cout << "Rows and cols for C: ";
+  cin >> rC >> cC;
+  cout << "Enter C:\n";
+  for (int i = 0; i < rC; i++)
+    for (int j = 0; j < cC; j++)
+      cin >> C[i][j];
+
+  int arrA[MAX * MAX], arrB[MAX * MAX], arrC[MAX * MAX];
+  int sizeA = 0, sizeB = 0, sizeC = 0;
+
+  for (int i = 0; i < rA; i++)
+    for (int j = 0; j < cA; j++)
+      arrA[sizeA++] = A[i][j];
+
+  for (int i = 0; i < rB; i++)
+    for (int j = 0; j < cB; j++)
+      arrB[sizeB++] = B[i][j];
+
+  for (int i = 0; i < rC; i++)
+    for (int j = 0; j < cC; j++)
+      arrC[sizeC++] = C[i][j];
+
+  int commonABC[MAX * 3], sizeCommon = 0;
+  for (int i = 0; i < sizeA; i++)
+  {
+    int val = arrA[i];
+    bool foundB = false, foundC = false, repeat = false;
+    for (int j = 0; j < sizeB; j++)
+      if (arrB[j] == val)
+        foundB = true;
+    for (int j = 0; j < sizeC; j++)
+      if (arrC[j] == val)
+        foundC = true;
+    for (int j = 0; j < sizeCommon; j++)
+      if (commonABC[j] == val)
+        repeat = true;
+    if (foundB && foundC && !repeat)
+      commonABC[sizeCommon++] = val;
+  }
+
+  int unique[MAX * 3], sizeUnique = 0;
+  for (int i = 0; i < sizeA; i++)
+  {
+    bool repeat = false;
+    for (int j = 0; j < sizeUnique; j++)
+      if (arrA[i] == unique[j])
+        repeat = true;
+    if (!repeat)
+      unique[sizeUnique++] = arrA[i];
+  }
+  for (int i = 0; i < sizeB; i++)
+  {
+    bool repeat = false;
+    for (int j = 0; j < sizeUnique; j++)
+      if (arrB[i] == unique[j])
+        repeat = true;
+    if (!repeat)
+      unique[sizeUnique++] = arrB[i];
+  }
+  for (int i = 0; i < sizeC; i++)
+  {
+    bool repeat = false;
+    for (int j = 0; j < sizeUnique; j++)
+      if (arrC[i] == unique[j])
+        repeat = true;
+    if (!repeat)
+      unique[sizeUnique++] = arrC[i];
+  }
+
+  int commonAC[MAX * 2], sizeAC = 0;
+  for (int i = 0; i < sizeA; i++)
+  {
+    int val = arrA[i];
+    bool foundC = false, repeat = false;
+    for (int j = 0; j < sizeC; j++)
+      if (arrC[j] == val)
+        foundC = true;
+    for (int j = 0; j < sizeAC; j++)
+      if (commonAC[j] == val)
+        repeat = true;
+    if (foundC && !repeat)
+      commonAC[sizeAC++] = val;
+  }
+
+  int negatives[MAX * 3], sizeNeg = 0;
+  for (int i = 0; i < sizeA; i++)
+    if (arrA[i] < 0)
+    {
+      bool repeat = false;
+      for (int j = 0; j < sizeNeg; j++)
+        if (negatives[j] == arrA[i])
+          repeat = true;
+      if (!repeat)
+        negatives[sizeNeg++] = arrA[i];
+    }
+
+  for (int i = 0; i < sizeB; i++)
+    if (arrB[i] < 0)
+    {
+      bool repeat = false;
+      for (int j = 0; j < sizeNeg; j++)
+        if (negatives[j] == arrB[i])
+          repeat = true;
+      if (!repeat)
+        negatives[sizeNeg++] = arrB[i];
+    }
+
+  for (int i = 0; i < sizeC; i++)
+    if (arrC[i] < 0)
+    {
+      bool repeat = false;
+      for (int j = 0; j < sizeNeg; j++)
+        if (negatives[j] == arrC[i])
+          repeat = true;
+      if (!repeat)
+        negatives[sizeNeg++] = arrC[i];
+    }
+
+  cout << "\nCommon in A, B, C: ";
+  for (int i = 0; i < sizeCommon; i++)
+    cout << commonABC[i] << " ";
+
+  cout << "\nUnique values: ";
+  for (int i = 0; i < sizeUnique; i++)
+    cout << unique[i] << " ";
+
+  cout << "\nCommon in A and C: ";
+  for (int i = 0; i < sizeAC; i++)
+    cout << commonAC[i] << " ";
+
+  cout << "\nNegative values (no repeats): ";
+  for (int i = 0; i < sizeNeg; i++)
+    cout << negatives[i] << " ";
+}
