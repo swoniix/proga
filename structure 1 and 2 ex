@@ -1,0 +1,98 @@
+#include <iostream>
+using namespace std;
+struct Student
+{
+  char *name;
+  unsigned short age;
+  float averageGrade;
+};
+void inputStudent(Student arr[], int size)
+{
+  for (int i = 0; i < size; i++)
+  {
+    arr[i].name = new char[50];
+    cout << "Enter name" << i + 1 << ':';
+    cin >> arr[i].name;
+    cout << "Enter age:";
+    cin >> arr[i].age;
+    cout << "Average Grade:";
+    cin >> arr[i].averageGrade;
+  }
+}
+void printStudent(Student arr[], int size)
+{
+  cout << "All Students:" << endl;
+  for (int i = 0; i < size; i++)
+  {
+    cout << "Name:" << arr[i].name << endl;
+    cout << "Age:" << arr[i].age << endl;
+    cout << "Average Grade:" << arr[i].averageGrade << endl;
+  }
+}
+void BestStudent(Student arr[], int size)
+{
+  int best = 0;
+  for (int i = 1; i < size; i++)
+  {
+    if (arr[i].averageGrade > arr[best].averageGrade)
+    {
+      best = i;
+    }
+  }
+  cout << "Best Student " << arr[best].name << "\nGrade:" << arr[best].averageGrade;
+}
+struct Book
+{
+  char *title;
+  char *author;
+  unsigned short year;
+};
+void showBooksAfter(Book books[], int size1, int targety)
+{
+  cout << "Books after this:" << targety << "year.";
+  for (int i = 0; i < size1; i++)
+  {
+    if (books[i].year > targety)
+    {
+      cout << "Title:" << books[i].title;
+      cout << "Author:" << books[i].author;
+      cout << "Year:" << books[i].year;
+    }
+  }
+}
+int main()
+{
+
+  const int size1 = 5;
+  Book books[size1];
+
+  for (int i = 0; i < size1; i++)
+  {
+    books[i].title = new char[50];
+    books[i].author = new char[50];
+
+    cout << "Book " << i + 1 << endl;
+    cout << "Title: ";
+    cin >> books[i].title;
+    cout << "Author: ";
+    cin >> books[i].author;
+    cout << "Year: ";
+    cin >> books[i].year;
+  }
+
+  int year;
+  cout << "Enter target year: ";
+  cin >> year;
+
+  showBooksAfter(books, size1, year);
+  for (int i = 0; i < size1; i++)
+  {
+    delete[] books[i].title;
+    delete[] books[i].author;
+  }
+  const int size = 3;
+  Student st[size];
+  inputStudent(st, size);
+  printStudent(st, size);
+  BestStudent(st, size);
+}
