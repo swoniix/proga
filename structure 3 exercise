@@ -1,0 +1,29 @@
+#include <iostream>
+using namespace std;
+
+struct Rectangle
+{
+  float width;
+  float height;
+};
+void fillRectangle(Rectangle &r)
+{
+  cout << "Enter width: ";
+  cin >> r.width;
+  cout << "Enter height: ";
+  cin >> r.height;
+}
+
+float calculateFormula(Rectangle r)
+{
+  return r.width * r.height;
+}
+
+int main()
+{
+  Rectangle r;
+  fillRectangle(r);
+
+  float area = calculateFormula(r);
+  cout << "Area: " << area << endl;
+}
