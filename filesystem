@@ -1,0 +1,57 @@
+#include <iostream>
+using namespace std;
+#include <stdio.h>
+
+int main()
+{
+  FILE *in = fopen("input.txt", "r");
+  FILE *out = fopen("output.txt", "w");
+
+  if (in == NULL || out == NULL) // NULL - если файл не открылся
+  {
+    printf("Файл не відкрито.\n");
+    return 1;
+  }
+
+  int ch;
+  int symbols = 0;
+  int lines = 0;
+  int vowels = 0;
+  int consonants = 0;
+  int digits = 0;
+
+  while ((ch = fgetc(in)) != EOF) // EOF - конец файла
+  {
+    symbols++;
+
+    if (ch == '\n')
+      lines++;
+    {
+      if (ch >= '0' && ch <= '9')
+      {
+        digits++;
+      }
+      else if (ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u' ||
+               ch == 'A' || ch == 'E' || ch == 'I' || ch == 'O' || ch == 'U')
+      {
+        vowels++;
+      }
+      else if ((ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z'))
+      {
+        consonants++;
+      }
+    }
+  }
+
+  if (symbols > 0 && ch != '\n')
+    lines++;
+
+  fprintf(out, "Total characters: %d\n", symbols);
+  fprintf(out, "Total lines: %d\n", lines);
+  fprintf(out, "Vowels: %d\n", vowels);
+  fprintf(out, "Consonants: %d\n", consonants);
+  fprintf(out, "Digits: %d\n", digits);
+
+  fclose(in);
+  fclose(out);
+}
